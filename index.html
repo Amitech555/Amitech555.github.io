@@ -387,6 +387,127 @@
     footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
     footer a:hover { color: var(--cyan); }
 
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(5,12,24,0.85);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: #0e1f3a;
+      border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 20px;
+      width: 100%; max-width: 640px;
+      max-height: 90vh; overflow-y: auto;
+      padding: 2.5rem;
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.28s cubic-bezier(.22,.68,0,1.2);
+      scrollbar-width: thin; scrollbar-color: rgba(37,99,235,0.3) transparent;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 1.75rem;
+    }
+    .modal-header h3 { font-size: 1.4rem; font-weight: 800; line-height: 1.2; }
+    .modal-header p  { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 0.3rem; }
+    .modal-close {
+      background: rgba(255,255,255,0.07); border: none; color: rgba(255,255,255,0.5);
+      width: 34px; height: 34px; border-radius: 50%; font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s, color 0.2s; margin-left: 1rem;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+    .f-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .f-group label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.5); text-transform: uppercase;
+    }
+    .f-group label .req { color: var(--cyan); margin-left: 2px; }
+    .f-group input,
+    .f-group select,
+    .f-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff; border-radius: 8px;
+      padding: 0.65rem 0.9rem; font-size: 0.9rem;
+      font-family: inherit; outline: none; width: 100%;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .f-group input:focus,
+    .f-group select:focus,
+    .f-group textarea:focus {
+      border-color: rgba(37,99,235,0.6); background: rgba(37,99,235,0.07);
+    }
+    .f-group input::placeholder,
+    .f-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .f-group select {
+      appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2306b6d4'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.75rem center;
+      padding-right: 2rem;
+    }
+    .f-group select option { background: #0e1f3a; }
+    .f-group textarea { resize: vertical; min-height: 90px; }
+    .form-checks-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.5); text-transform: uppercase;
+      margin-bottom: 0.5rem; display: block;
+    }
+    .form-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    @media (max-width: 500px) { .form-checks { grid-template-columns: 1fr; } }
+    .form-check {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: rgba(255,255,255,0.6); cursor: pointer;
+    }
+    .form-check input { accent-color: var(--cyan); width: 15px; height: 15px; flex-shrink: 0; }
+
+    .modal-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.5rem 0; }
+
+    .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+    .btn-submit {
+      flex: 1; background: linear-gradient(135deg, var(--accent), #0ea5e9);
+      color: #fff; border: none; border-radius: 10px;
+      padding: 0.9rem 1.5rem; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+      font-family: inherit;
+    }
+    .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-cancel {
+      background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+      padding: 0.9rem 1.25rem; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s; font-family: inherit;
+    }
+    .btn-cancel:hover { background: rgba(255,255,255,0.09); }
+    .modal-note {
+      font-size: 0.75rem; color: rgba(255,255,255,0.25);
+      text-align: center; margin-top: 0.75rem; line-height: 1.5;
+    }
+
+    /* Success state */
+    .modal-success {
+      display: none; text-align: center; padding: 2rem 0;
+    }
+    .modal-success .success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, #34d399, var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin: 0 auto 1.25rem;
+    }
+    .modal-success h4 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .modal-success p  { color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       nav { padding: 0.75rem 1rem; }
@@ -394,6 +515,8 @@
       .pricing-box { padding: 2rem 1.25rem; }
       .steps::before { left: 24px; }
       .step-num { width: 48px; height: 48px; font-size: 1rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .modal { padding: 1.75rem 1.25rem; }
     }
   </style>
 </head>
@@ -407,7 +530,7 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       <span class="wa-label">WhatsApp</span>
     </a>
-    <a href="mailto:amitech_AI@outlook.com" class="cta-nav">Soumission</a>
+    <button onclick="openModal()" class="cta-nav" style="cursor:pointer;border:none;">Soumission</button>
   </div>
 </nav>
 
@@ -422,7 +545,7 @@
     <h1>Votre entreprise mérite<br>une <em>vision en temps réel</em></h1>
     <p>Amitech accompagne les organisations dans leur transformation opérationnelle grâce à l'intelligence artificielle — du diagnostic à l'activation, sans engagement long terme.</p>
     <div class="hero-ctas">
-      <a href="mailto:amitech_AI@outlook.com" class="btn-primary">Demander une soumission</a>
+      <button onclick="openModal()" class="btn-primary" style="cursor:pointer;border:none;">Demander une soumission</button>
       <a href="#approche" class="btn-secondary">Notre approche →</a>
     </div>
   </div>
@@ -705,9 +828,9 @@
     <h2>Prêt à voir votre entreprise autrement ?</h2>
     <p class="sub">Demandez une soumission gratuite. Nous vous répondons sous 24h.</p>
     <div class="contact-btns">
-      <a href="mailto:amitech_AI@outlook.com" class="email-cta">
+      <button onclick="openModal()" class="email-cta" style="cursor:pointer;border:none;">
         ✉&nbsp; Demander une soumission
-      </a>
+      </button>
       <a href="https://wa.me/15147096099?text=Bonjour%20Amitech%2C%20je%20souhaite%20obtenir%20une%20soumission%20pour%20mon%20organisation." target="_blank" rel="noopener" class="wa-cta">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Nous contacter sur WhatsApp
@@ -718,12 +841,236 @@
   </div>
 </section>
 
+<!-- MODAL SOUMISSION -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+
+    <!-- Form view -->
+    <div id="modal-form-view">
+      <div class="modal-header">
+        <div>
+          <h3 id="modal-title">Demande de soumission</h3>
+          <p>Réponse garantie sous 24h — sans engagement.</p>
+        </div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Fermer">✕</button>
+      </div>
+
+      <form id="soumission-form" onsubmit="submitForm(event)" novalidate>
+        <div class="form-grid">
+
+          <!-- Identité -->
+          <div class="f-group">
+            <label>Prénom <span class="req">*</span></label>
+            <input type="text" id="f-prenom" placeholder="ex : Karim" required />
+          </div>
+          <div class="f-group">
+            <label>Nom <span class="req">*</span></label>
+            <input type="text" id="f-nom" placeholder="ex : Benali" required />
+          </div>
+
+          <!-- Compagnie -->
+          <div class="f-group full">
+            <label>Nom de la compagnie <span class="req">*</span></label>
+            <input type="text" id="f-compagnie" placeholder="ex : Groupe Atlas Construction" required />
+          </div>
+
+          <!-- Contact -->
+          <div class="f-group">
+            <label>Courriel <span class="req">*</span></label>
+            <input type="email" id="f-email" placeholder="vous@exemple.com" required />
+          </div>
+          <div class="f-group">
+            <label>Téléphone / WhatsApp</label>
+            <input type="tel" id="f-tel" placeholder="+212 6 XX XX XX XX" />
+          </div>
+
+          <!-- Secteur & taille -->
+          <div class="f-group">
+            <label>Secteur d'activité <span class="req">*</span></label>
+            <select id="f-secteur" required>
+              <option value="" disabled selected>Choisir…</option>
+              <option>Construction &amp; BTP</option>
+              <option>Services Professionnels</option>
+              <option>Santé</option>
+              <option>Formation &amp; Éducation</option>
+              <option>Commerce &amp; Distribution</option>
+              <option>Industrie &amp; Manufacture</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label>Taille de l'équipe</label>
+            <select id="f-taille">
+              <option value="" disabled selected>Choisir…</option>
+              <option>1 – 10 employés</option>
+              <option>11 – 50 employés</option>
+              <option>51 – 200 employés</option>
+              <option>200 + employés</option>
+            </select>
+          </div>
+
+          <!-- Domaine d'expertise -->
+          <div class="f-group full">
+            <label>Domaine d'expertise / Description de votre activité <span class="req">*</span></label>
+            <input type="text" id="f-expertise" placeholder="ex : Promoteur immobilier spécialisé en logements sociaux au Maroc" required />
+          </div>
+
+          <!-- Objectifs -->
+          <div class="f-group full">
+            <label>Objectifs principaux <span class="req">*</span></label>
+            <textarea id="f-objectifs" placeholder="Décrivez ce que vous souhaitez améliorer, automatiser ou mettre en place…" required></textarea>
+          </div>
+
+          <!-- Pain points -->
+          <div class="f-group full">
+            <span class="form-checks-label">Défis actuels (cochez tout ce qui s'applique)</span>
+            <div class="form-checks">
+              <label class="form-check"><input type="checkbox" value="Décisions prises sur WhatsApp" /> 📱 Décisions sur WhatsApp</label>
+              <label class="form-check"><input type="checkbox" value="Données éparpillées" /> 📂 Données éparpillées</label>
+              <label class="form-check"><input type="checkbox" value="Aucun tableau de bord" /> 📊 Pas de tableau de bord</label>
+              <label class="form-check"><input type="checkbox" value="Aucune alerte proactive" /> 🔕 Pas d'alertes proactives</label>
+              <label class="form-check"><input type="checkbox" value="Processus manuels à automatiser" /> ⚙️ Processus manuels lourds</label>
+              <label class="form-check"><input type="checkbox" value="Manque de visibilité sur les équipes" /> 👥 Visibilité sur les équipes</label>
+            </div>
+          </div>
+
+          <!-- Source -->
+          <div class="f-group full">
+            <label>Comment nous avez-vous trouvés ?</label>
+            <select id="f-source">
+              <option value="" disabled selected>Choisir…</option>
+              <option>LinkedIn</option>
+              <option>Recommandation / Bouche à oreille</option>
+              <option>Recherche Google</option>
+              <option>Événement / Conférence</option>
+              <option>Autre</option>
+            </select>
+          </div>
+
+        </div><!-- /form-grid -->
+
+        <hr class="modal-divider" />
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
+          <button type="submit" class="btn-submit">Envoyer ma demande →</button>
+        </div>
+        <p class="modal-note">Vos informations sont utilisées uniquement pour répondre à votre demande et ne sont jamais partagées avec des tiers.</p>
+      </form>
+    </div>
+
+    <!-- Success view -->
+    <div class="modal-success" id="modal-success-view">
+      <div class="success-icon">✓</div>
+      <h4>Demande envoyée !</h4>
+      <p>Merci <span id="success-name"></span>. Votre courriel s'est ouvert avec toutes vos informations.<br>Nous vous répondons sous <strong>24h</strong>.</p>
+      <br />
+      <a href="https://wa.me/15147096099" target="_blank" rel="noopener" class="wa-cta" style="justify-content:center;display:inline-flex;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Confirmer aussi via WhatsApp
+      </a>
+      <br /><br />
+      <button class="btn-cancel" onclick="closeModal()" style="margin:0 auto;display:block;">Fermer</button>
+    </div>
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p>© 2026 <strong>Amitech</strong> — Transformation Opérationnelle par l'IA &nbsp;·&nbsp; Maroc &amp; Marchés Francophones &nbsp;·&nbsp; <a href="mailto:amitech_AI@outlook.com">amitech_AI@outlook.com</a></p>
 </footer>
 
 <script>
+  // ── MODAL ──
+  function openModal() {
+    const overlay = document.getElementById('modal-overlay');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Reset to form view each time
+    document.getElementById('modal-form-view').style.display = '';
+    document.getElementById('modal-success-view').style.display = 'none';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function submitForm(e) {
+    e.preventDefault();
+
+    // Validation
+    const required = ['f-prenom','f-nom','f-compagnie','f-email','f-secteur','f-expertise','f-objectifs'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { el.style.borderColor = '#f87171'; valid = false; }
+      else el.style.borderColor = '';
+    });
+    if (!valid) return;
+
+    // Collect checkboxes
+    const defis = [...document.querySelectorAll('.form-checks input:checked')]
+      .map(cb => '• ' + cb.value).join('\n') || 'Aucun sélectionné';
+
+    // Build email body
+    const prenom    = document.getElementById('f-prenom').value.trim();
+    const nom       = document.getElementById('f-nom').value.trim();
+    const compagnie = document.getElementById('f-compagnie').value.trim();
+    const email     = document.getElementById('f-email').value.trim();
+    const tel       = document.getElementById('f-tel').value.trim() || 'Non fourni';
+    const secteur   = document.getElementById('f-secteur').value;
+    const taille    = document.getElementById('f-taille').value || 'Non précisé';
+    const expertise = document.getElementById('f-expertise').value.trim();
+    const objectifs = document.getElementById('f-objectifs').value.trim();
+    const source    = document.getElementById('f-source').value || 'Non précisé';
+
+    const subject = encodeURIComponent(`Demande de soumission — ${compagnie}`);
+    const body = encodeURIComponent(
+`Bonjour Amitech,
+
+Voici ma demande de soumission :
+
+── IDENTITÉ ──
+Prénom       : ${prenom}
+Nom          : ${nom}
+Courriel     : ${email}
+Téléphone    : ${tel}
+
+── ORGANISATION ──
+Compagnie    : ${compagnie}
+Secteur      : ${secteur}
+Taille       : ${taille}
+Expertise    : ${expertise}
+
+── OBJECTIFS ──
+${objectifs}
+
+── DÉFIS ACTUELS ──
+${defis}
+
+── SOURCE ──
+${source}
+
+---
+Envoyé depuis le formulaire Amitech`
+    );
+
+    window.location.href = `mailto:amitech_AI@outlook.com?subject=${subject}&body=${body}`;
+
+    // Show success
+    document.getElementById('modal-form-view').style.display = 'none';
+    document.getElementById('modal-success-view').style.display = 'block';
+    document.getElementById('success-name').textContent = prenom;
+  }
+
   // ── Salary presets per sector (monthly, MAD base) ──
   const SECTOR_SAL = { construction: 18000, services: 22000, sante: 20000, formation: 14000 };
 
