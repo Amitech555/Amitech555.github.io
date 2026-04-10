@@ -281,6 +281,103 @@
     }
     .email-plain:hover { color: var(--cyan); }
 
+    /* ── CALCULATOR ── */
+    #calculateur { background: rgba(255,255,255,0.015); }
+    .calc-wrap {
+      margin-top: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 820px) { .calc-wrap { grid-template-columns: 1fr; } }
+
+    .calc-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 2rem;
+      display: flex; flex-direction: column; gap: 1.4rem;
+    }
+    .calc-field label {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.7);
+      margin-bottom: 0.5rem;
+    }
+    .calc-field label span {
+      font-size: 0.9rem; font-weight: 700; color: var(--cyan);
+    }
+    .calc-field select, .calc-field input[type="range"] { width: 100%; }
+    .calc-field select {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; border-radius: 8px; padding: 0.55rem 0.85rem;
+      font-size: 0.9rem; cursor: pointer; outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2306b6d4'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.75rem center;
+      padding-right: 2rem;
+    }
+    .calc-field select option { background: #0a1628; }
+    input[type="range"] {
+      -webkit-appearance: none; height: 5px;
+      background: rgba(255,255,255,0.1); border-radius: 99px; outline: none; cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--cyan));
+      box-shadow: 0 0 8px rgba(37,99,235,0.5);
+    }
+    .calc-checks { display: flex; flex-direction: column; gap: 0.6rem; }
+    .calc-check {
+      display: flex; align-items: center; gap: 0.65rem;
+      font-size: 0.88rem; color: rgba(255,255,255,0.65); cursor: pointer;
+      user-select: none;
+    }
+    .calc-check input { accent-color: var(--cyan); width: 16px; height: 16px; cursor: pointer; }
+    .calc-check-label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+
+    /* Results panel */
+    .calc-results {
+      background: linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(6,182,212,0.07) 100%);
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 16px; padding: 2rem;
+      display: flex; flex-direction: column; gap: 1.5rem;
+      position: sticky; top: 90px;
+    }
+    .calc-results-title {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--cyan);
+    }
+    .calc-metric { display: flex; flex-direction: column; gap: 0.2rem; }
+    .calc-metric-label { font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+    .calc-metric-value {
+      font-size: 2rem; font-weight: 800; letter-spacing: -1px;
+      transition: color 0.3s;
+    }
+    .calc-metric-value.negative { color: #f87171; }
+    .calc-metric-value.positive {
+      background: linear-gradient(135deg, #34d399, var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .calc-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+    .calc-breakdown { display: flex; flex-direction: column; gap: 0.6rem; }
+    .calc-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.82rem;
+    }
+    .calc-row-label { color: rgba(255,255,255,0.45); }
+    .calc-row-value { font-weight: 600; color: rgba(255,255,255,0.7); }
+    .calc-row-value.warn { color: #fbbf24; }
+    .calc-cta-note {
+      background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 10px; padding: 1rem 1.25rem;
+      font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5;
+      text-align: center;
+    }
+    .calc-cta-note strong { color: #fff; }
+    .calc-disclaimer {
+      font-size: 0.72rem; color: rgba(255,255,255,0.25);
+      text-align: center; line-height: 1.5;
+    }
+
     /* ── FOOTER ── */
     footer {
       text-align: center; padding: 2rem 1.5rem;
@@ -481,6 +578,126 @@
   </div>
 </section>
 
+<!-- CALCULATOR -->
+<section id="calculateur">
+  <div class="container">
+    <p class="section-tag">Calculateur d'économies</p>
+    <h2>Combien perdez-vous chaque année ?</h2>
+    <p class="section-sub">Estimez en 30 secondes le coût réel de vos inefficacités opérationnelles et ce qu'Amitech peut vous faire récupérer.</p>
+
+    <div class="calc-wrap">
+      <!-- INPUTS -->
+      <div class="calc-form">
+
+        <div class="calc-field">
+          <label>Secteur d'activité</label>
+          <select id="c-secteur">
+            <option value="construction">🏗️ Construction &amp; BTP</option>
+            <option value="services" selected>💼 Services Professionnels</option>
+            <option value="sante">🏥 Santé</option>
+            <option value="formation">🎓 Formation &amp; Éducation</option>
+          </select>
+        </div>
+
+        <div class="calc-field">
+          <label>Nombre d'employés <span id="v-emp">20</span></label>
+          <input type="range" id="c-emp" min="3" max="300" value="20" step="1" />
+        </div>
+
+        <div class="calc-field">
+          <label>Salaire mensuel moyen <span id="v-sal"></span></label>
+          <input type="range" id="c-sal" min="5000" max="80000" value="15000" step="1000" />
+        </div>
+
+        <div class="calc-field">
+          <label>Devise</label>
+          <select id="c-devise">
+            <option value="MAD">MAD — Dirham marocain</option>
+            <option value="CAD">CAD — Dollar canadien</option>
+            <option value="EUR">EUR — Euro</option>
+          </select>
+        </div>
+
+        <div class="calc-field">
+          <p class="calc-check-label">Problèmes identifiés dans votre organisation</p>
+          <div class="calc-checks">
+            <label class="calc-check">
+              <input type="checkbox" id="p-wa" checked />
+              📱 Décisions prises sur WhatsApp (≈ 3h perdues/semaine/employé)
+            </label>
+            <label class="calc-check">
+              <input type="checkbox" id="p-data" checked />
+              📂 Données éparpillées, recherche manuelle (≈ 2h/semaine/employé)
+            </label>
+            <label class="calc-check">
+              <input type="checkbox" id="p-dash" checked />
+              📊 Aucun tableau de bord consolidé (≈ 1.5h/semaine/employé)
+            </label>
+            <label class="calc-check">
+              <input type="checkbox" id="p-alert" checked />
+              🔕 Aucune alerte proactive — réaction tardive (≈ 2h/semaine/employé)
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="calc-results">
+        <p class="calc-results-title">Estimation annuelle</p>
+
+        <div class="calc-metric">
+          <span class="calc-metric-label">Coût annuel des inefficacités</span>
+          <span class="calc-metric-value negative" id="r-perte">—</span>
+        </div>
+
+        <hr class="calc-divider" />
+
+        <div class="calc-metric">
+          <span class="calc-metric-label">Économies potentielles avec Amitech</span>
+          <span class="calc-metric-value positive" id="r-saving">—</span>
+        </div>
+
+        <div class="calc-metric">
+          <span class="calc-metric-label">Heures récupérées par an</span>
+          <span class="calc-metric-value positive" id="r-hours" style="font-size:1.4rem">—</span>
+        </div>
+
+        <hr class="calc-divider" />
+
+        <div class="calc-breakdown">
+          <div class="calc-row">
+            <span class="calc-row-label">📱 WhatsApp &amp; décisions</span>
+            <span class="calc-row-value warn" id="b-wa">—</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-row-label">📂 Recherche de données</span>
+            <span class="calc-row-value warn" id="b-data">—</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-row-label">📊 Absence de dashboard</span>
+            <span class="calc-row-value warn" id="b-dash">—</span>
+          </div>
+          <div class="calc-row">
+            <span class="calc-row-label">🔕 Réaction tardive</span>
+            <span class="calc-row-value warn" id="b-alert">—</span>
+          </div>
+        </div>
+
+        <div class="calc-cta-note">
+          Amitech récupère en moyenne <strong>65 % des pertes identifiées</strong> dès les 3 premiers mois d'activation.
+        </div>
+
+        <a href="https://wa.me/15147096099?text=Bonjour%20Amitech%2C%20j%27ai%20utilis%C3%A9%20votre%20calculateur%20et%20je%20voudrais%20en%20savoir%20plus." target="_blank" rel="noopener" class="wa-cta" style="justify-content:center;margin-top:0.25rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Discuter de mes résultats
+        </a>
+
+        <p class="calc-disclaimer">Estimation indicative basée sur des moyennes sectorielles. Les résultats réels varient selon votre contexte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="contact">
   <div class="container">
@@ -506,5 +723,87 @@
   <p>© 2026 <strong>Amitech</strong> — Transformation Opérationnelle par l'IA &nbsp;·&nbsp; Maroc &amp; Marchés Francophones &nbsp;·&nbsp; <a href="mailto:amitech_AI@outlook.com">amitech_AI@outlook.com</a></p>
 </footer>
 
+<script>
+  // ── Salary presets per sector (monthly, MAD base) ──
+  const SECTOR_SAL = { construction: 18000, services: 22000, sante: 20000, formation: 14000 };
+
+  // ── Currency conversion (rough fixed rates vs MAD) ──
+  const FX = { MAD: 1, CAD: 0.135, EUR: 0.092 };
+  const SYM = { MAD: 'MAD', CAD: 'CA$', EUR: '€' };
+
+  // ── Waste per problem: hours lost per week per employee ──
+  const WASTE_H = { wa: 3, data: 2, dash: 1.5, alert: 2 };
+
+  // ── Amitech recovery rate ──
+  const RECOVERY = 0.65;
+
+  const $ = id => document.getElementById(id);
+
+  function fmt(n, devise) {
+    const sym = SYM[devise];
+    const val = Math.round(n * FX[devise]);
+    return val.toLocaleString('fr-FR') + ' ' + sym;
+  }
+
+  function fmtShort(n, devise) {
+    const val = Math.round(n * FX[devise]);
+    if (val >= 1_000_000) return (val / 1_000_000).toFixed(1).replace('.', ',') + ' M ' + SYM[devise];
+    if (val >= 1000)      return (val / 1000).toFixed(0) + ' k ' + SYM[devise];
+    return val.toLocaleString('fr-FR') + ' ' + SYM[devise];
+  }
+
+  function compute() {
+    const emp    = +$('c-emp').value;
+    const sal    = +$('c-sal').value;          // monthly MAD
+    const devise = $('c-devise').value;
+    const hourly = sal / (22 * 8);             // MAD per hour
+
+    const checks = { wa: $('p-wa').checked, data: $('p-data').checked,
+                     dash: $('p-dash').checked, alert: $('p-alert').checked };
+
+    let totalH = 0, totalCost = 0;
+    const breakdown = {};
+
+    for (const [k, h] of Object.entries(WASTE_H)) {
+      const annualH = checks[k] ? h * 52 * emp : 0;
+      const cost    = annualH * hourly;
+      breakdown[k]  = cost;
+      totalH       += annualH;
+      totalCost    += cost;
+    }
+
+    const savings = totalCost * RECOVERY;
+
+    // Update display
+    $('r-perte').textContent  = totalCost > 0 ? '− ' + fmtShort(totalCost, devise) : '0';
+    $('r-saving').textContent = savings  > 0 ? '+ ' + fmtShort(savings,   devise) : '0';
+    $('r-hours').textContent  = Math.round(totalH).toLocaleString('fr-FR') + ' h/an';
+
+    const na = '—';
+    $('b-wa').textContent    = checks.wa    ? fmt(breakdown.wa,    devise) : na;
+    $('b-data').textContent  = checks.data  ? fmt(breakdown.data,  devise) : na;
+    $('b-dash').textContent  = checks.dash  ? fmt(breakdown.dash,  devise) : na;
+    $('b-alert').textContent = checks.alert ? fmt(breakdown.alert, devise) : na;
+
+    // Update slider label
+    $('v-emp').textContent = emp + ' emp.';
+    $('v-sal').textContent = sal.toLocaleString('fr-FR') + ' ' + SYM[devise] + '/mois';
+  }
+
+  // Preset salary when sector changes
+  $('c-secteur').addEventListener('change', () => {
+    $('c-sal').value = SECTOR_SAL[$('c-secteur').value];
+    compute();
+  });
+
+  // Wire all inputs
+  ['c-emp','c-sal','c-devise','p-wa','p-data','p-dash','p-alert'].forEach(id => {
+    $(id).addEventListener('input', compute);
+    $(id).addEventListener('change', compute);
+  });
+
+  // Init
+  compute();
+</script>
 </body>
 </html>
